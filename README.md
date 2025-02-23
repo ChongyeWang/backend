@@ -1,4 +1,4 @@
-# How to Run a Gin Project
+# How to Run the Project
 
 This guide will walk you through the steps to set up and run this project.
 
