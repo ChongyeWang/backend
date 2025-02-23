@@ -23,7 +23,7 @@ jobs:
       - name: Set up SSH key for EC2 access
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ test }}
+          ssh-private-key: ${{ secrets.test }}
 
       - name: SSH into EC2 and deploy
         run: |
