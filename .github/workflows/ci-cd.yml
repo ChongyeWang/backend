@@ -1,0 +1,85 @@
+name: Deploy Dockerized Go Application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-go-app .
+
+      - name: Set up SSH key for EC2 access
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ -----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY----- }}
+
+      - name: SSH into EC2 and deploy
+         run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@3.137.41.239 << 'EOF'
+            container_id=$(docker ps -q --filter "backend")
+            if [ -n "$container_id" ]; then
+              docker stop $container_id
+              docker rm $container_id
+            fi
+            docker run -d --name backend -p 8080:8080 backend
+          EOF
